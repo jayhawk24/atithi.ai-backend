@@ -67,4 +67,9 @@ def get_current_user(
     token = verify_token(token, credentials_exception)
     user = db.query(Users).filter(Users.id == token.id).first()
 
+    if not user or (user.id is None):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials."
+        )
+
     return user

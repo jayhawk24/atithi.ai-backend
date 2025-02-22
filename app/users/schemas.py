@@ -1,5 +1,7 @@
 from pydantic import BaseModel, constr, EmailStr, ConfigDict
 
+from commons.enums import Roles
+
 
 class UserSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
@@ -14,6 +16,7 @@ class SignUpRequestSchema(BaseModel):
     name: constr(min_length=3, max_length=50)
     email: EmailStr
     password: constr(min_length=8, max_length=50)
+    role: Roles
 
 
 class SignUpResponseSchema(BaseModel):

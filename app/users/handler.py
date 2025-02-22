@@ -74,9 +74,5 @@ async def signup(payload: SignUpRequestSchema, db: Session = Depends(get_db)):
 async def get_me(
     user: Users = Depends(get_current_user), db: Session = Depends(get_db)
 ) -> UserSchema:
-    if not user or (user.id is None):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials."
-        )
 
     return user

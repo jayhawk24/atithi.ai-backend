@@ -4,6 +4,7 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from db.database import Base
 from core.config import SQLALCHEMY_DATABASE_URL
+import rooms
 
 from alembic import context
 
