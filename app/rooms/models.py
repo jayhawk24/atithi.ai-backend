@@ -19,6 +19,7 @@ class Rooms(Base):
     __tablename__ = "rooms"
 
     id = Column(String(50), primary_key=True, index=True, default=get_uuid)
+    code = Column(String(100), unique=True, nullable=False)
     name = Column(String(50), nullable=False)
     images = Column(MutableList.as_mutable(JSON), nullable=True)
     no_of_beds = Column(Integer, nullable=True)

@@ -17,3 +17,34 @@ async def get_rooms(
     rooms = db.query(Rooms).join(UsersRooms).filter(UsersRooms.user_id == user.id).all()
 
     return rooms
+
+
+@rooms_router.get("/room-code/{room_code}")
+async def get_room_by_code(
+    room_code: str,
+    db: Session = Depends(get_db),
+) -> RoomSchema:
+    room = db.query(Rooms).filter(Rooms.code == room_code).first()
+
+    if not room:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Room not found",
+        )
+
+    return room
+
+
+@rooms_router.get("/{room_id}")
+async def get_room(
+    room_id: str, user: Users = Depends(get_current_user), db: Session = Depends(get_db)
+) -> RoomSchema:
+    room = db.query(Rooms).filter(Rooms.id == room_id).first()
+
+    if not room:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Room not found",
+        )
+
+    return room
