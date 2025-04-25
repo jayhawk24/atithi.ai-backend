@@ -10,3 +10,4 @@ class Roles(Enum):
     guest = "guest"
     host = "host"
     staff = "staff"
+    admin = "admin"
